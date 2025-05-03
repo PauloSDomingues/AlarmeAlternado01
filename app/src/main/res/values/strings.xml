@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Alarme Alternado</string>
+    <string name="no_alarms">Nenhum alarme agendado.</string>
+    <string name="add_alarm">Adicionar Alarme</string>
+</resources>

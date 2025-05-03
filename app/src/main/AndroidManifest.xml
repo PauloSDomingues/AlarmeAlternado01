@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/ic_alarm"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_alarm"
+        android:supportsRtl="true"
+
+        android:theme="@style/AppTheme"
+        tools:targetApi="31">
+
+        <service
+            android:name=".AlarmService"
+            android:exported="true"
+            android:foregroundServiceType="mediaPlayback" />
+
+        <receiver android:name=".receiver.StopAlarmReceiver" />
+
+        <receiver android:name=".receiver.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.paulosd.alarmealternado.ALARM_TRIGGERED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.paulosd.alarmealternado.STOP_ALARM" />
+            </intent-filter>
+        </receiver>
+        
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".AlarmConfigActivity"></activity>
+    </application>
+
+    <!-- Permissões para alarmes e notificações -->
+    <uses-permission android:name="android.permission.SET_ALARM"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <!-- Permissões para mídia -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- Permissões para serviços em primeiro plano -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+
+    <supports-screens
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true"
+        android:anyDensity="true" />
+
+</manifest>
